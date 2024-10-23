@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Mosaic Trend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 💻 프로젝트 소개
 
-## Available Scripts
+> 빠르게 변화하는 트렌드
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+## 📅 개발 기간
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> 2024.10.23 - 2024.00.00
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `npm test`
+## 💪🏻 사용 스킬
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **언어**
+  - HTML
+  - SCSS
+  - JavaScript
+- **환경**
+  - Windows
+  - React JS
+- **라이브러리**
+  - Google Trend API
+- **툴**
+  - Visual Studio Code
+  - GitHub
+- **서비스**
+  - 배포할 때 수정할 것
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎓 주요 기능
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> **키워드 검색**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 키워드를 검색하면 해당 키워드에 대한 ..........ㅎ
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> **인기 급상승 트렌드 조회**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 그렇다고합니다,,
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> **실시간 순위 확인**
 
-## Learn More
+- 그렇다고합니다,,2
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 💬 개발 코멘트
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> **Create and Action! C.N.A입니다.** <br>
+> 팀명 소개
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**박근모**  
+comments content
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**문희연**  
+comments content
 
-### Making a Progressive Web App
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**서정은**  
+comments content
 
-### Advanced Configuration
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**차준호**  
+comments content
