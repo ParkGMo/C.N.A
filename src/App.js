@@ -1,8 +1,16 @@
-import React from "react";
-import "./scss/global.scss";
+import React from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Intro from './pages/intro/Intro';
+import './scss/global.scss';
 
 function App() {
-  return <div className="App">웰컴 백수!</div>;
+  return (
+    <Router>
+      <Routes>
+        <Route index element={<Intro />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
