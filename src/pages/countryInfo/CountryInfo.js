@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { basicInfoData } from '../../api/basicInfo';
 import Search from '../../components/search/Search';
+import { convertCodeISO3 } from '../../lib/convertIsoCode';
 import { randomCountryName } from '../../utils/randomCountryName';
 import styles from './CountryInfo.module.scss';
 
@@ -9,7 +10,9 @@ function CountryInfo() {
   const [value, setValue] = useState(randomCountryName());
 
   const handleLoad = useCallback(async () => {
-    const basicData = await basicInfoData(value);
+    const isoCode = convertCodeISO3(value);
+
+    const basicData = await basicInfoData(isoCode);
     setData(basicData);
   }, [value]);
 
