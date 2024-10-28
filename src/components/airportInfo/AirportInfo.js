@@ -28,15 +28,3 @@ function AirportInfo() {
 }
 
 export default AirportInfo;
-
-case
-`
-말레이시아
-`
-:
-return
-`
-MY
-`
-;
-
