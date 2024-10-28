@@ -14,7 +14,7 @@ function ExchageRate() {
         "x-rapidapi-host": "real-time-finance-data.p.rapidapi.com",
       },
     };
-
+    // https://rapidapi.com/letscrape-6bRBa3QguO5/api/real-time-finance-data/playground/endpoint_4e2f5fe5-c331-4b47-b1cc-b1da5d5122bc
     try {
       const response = await fetch(url, options);
       const result = await response.json();
