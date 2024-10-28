@@ -12,7 +12,7 @@ function AirportInfo() {
         "x-rapidapi-host": "airport-info.p.rapidapi.com",
       },
     };
-
+    // https://rapidapi.com/Active-api/api/airport-info/playground/apiendpoint_340c4d83-e0ae-4e4e-8759-5d53a53349c7
     try {
       const response = await fetch(url, options);
       const result = await response.json();
@@ -28,3 +28,15 @@ function AirportInfo() {
 }
 
 export default AirportInfo;
+
+case
+`
+말레이시아
+`
+:
+return
+`
+MY
+`
+;
+
