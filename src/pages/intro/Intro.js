@@ -1,9 +1,10 @@
-import React from "react";
-import Search from "../../components/search/Search";
-import styles from "./Intro.module.scss";
-import TravelAvisorAPI from "../../components/travelAdvisor/TravelAvisorAPI";
-import AirportInfo from "../../components/airportInfo/AirportInfo";
-import IATAICAO from "../../components/IATAICAO/IATAICAO";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import AirportInfo from '../../components/airportInfo/AirportInfo';
+import IATAICAO from '../../components/IATAICAO/IATAICAO';
+import Search from '../../components/search/Search';
+import TravelAvisorAPI from '../../components/travelAdvisor/TravelAvisorAPI';
+import styles from './Intro.module.scss';
 
 function Intro() {
   return (
@@ -14,6 +15,7 @@ function Intro() {
       <TravelAvisorAPI />
       <AirportInfo />
       <IATAICAO />
+      <Link to="country-info">나라별 기본정보 검색하기</Link>
     </div>
   );
 }
