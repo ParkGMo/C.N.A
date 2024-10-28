@@ -18,22 +18,12 @@ export function convertCodeISO3(countryName) {
       return 'GUY';
     case '감비아':
       return 'GMB';
-    case '건지':
-      return 'GGY';
-    case '과들루프':
-      return 'GLP';
     case '과테말라':
       return 'GTM';
-    case '괌':
-      return 'GUM';
-    case '교황청':
-      return 'VAT';
     case '그레나다':
       return 'GRD';
     case '그리스':
       return 'GRC';
-    case '그린란드':
-      return 'GRL';
     case '기니':
       return 'GIN';
     case '기니비사우':
@@ -87,8 +77,6 @@ export function convertCodeISO3(countryName) {
       return 'LBN';
     case '레소토':
       return 'LSO';
-    case '레위니옹':
-      return 'REU';
     case '루마니아':
       return 'ROU';
     case '룩셈부르크':
@@ -103,12 +91,8 @@ export function convertCodeISO3(countryName) {
       return 'LIE';
     case '마다가스카르':
       return 'MDG';
-    case '마르티니크':
-      return 'MTQ';
     case '마셜제도':
       return 'MHL';
-    case '마요트':
-      return 'MYT';
     case '마이크로네시아':
       return 'FSM';
     case '마카오':
@@ -411,8 +395,6 @@ export function convertCodeISO3(countryName) {
       return 'PRT';
     case '폴란드':
       return 'POL';
-    case '푸에르토리코':
-      return 'PRI';
     case '프랑스':
       return 'FRA';
     case '피지':

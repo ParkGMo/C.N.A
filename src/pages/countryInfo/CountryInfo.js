@@ -21,13 +21,12 @@ function CountryInfo() {
   }, [value, handleLoad]);
 
   console.log(data);
-  console.log(value);
 
   return (
     <div className={styles.container}>
       CountryInfo
       <Search value={value} setValue={setValue} />
-      {data ? (
+      {data && value !== '' ? (
         <div>
           <div>국가명 : {data.countryName}</div>
           <div>영문명 : {data.countryEnName}</div>
@@ -35,6 +34,11 @@ function CountryInfo() {
           <div>
             <img src={data.imgUrl} alt="" />
           </div>
+        </div>
+      ) : data === undefined && value !== '' ? (
+        <div>
+          <p>해당 국가에 대한 정보가 없습니다.</p>
+          <span>검색어를 다시 한 번 확인해주세요!</span>
         </div>
       ) : (
         <div>검색어를 입력해주세요.</div>
