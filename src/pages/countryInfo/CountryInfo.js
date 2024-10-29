@@ -4,6 +4,7 @@ import {
   localContactInfoData,
   securityEnvInfoData,
 } from '../../api/basicInfo';
+import CustomModal from '../../components/layout/custom-modal/CustomModal';
 import Search from '../../components/search/Search';
 import { convertCodeISO2, convertCodeISO3 } from '../../lib/convertIsoCode';
 import { randomCountryName } from '../../utils/randomCountryName';
@@ -14,6 +15,10 @@ function CountryInfo() {
   const [securityEnvData, setSecurityEnvData] = useState([]);
   const [localContactData, setLocalContactData] = useState([]);
   const [value, setValue] = useState(randomCountryName());
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
 
   const handleLoad = useCallback(async () => {
     const isoCode2 = convertCodeISO2(value);
@@ -32,14 +37,20 @@ function CountryInfo() {
     handleLoad();
   }, [value, handleLoad]);
 
-  console.log(localContactData);
-
   return (
     <div className={styles.container}>
-      CountryInfo
       <Search value={value} setValue={setValue} />
       {basicData && value !== '' ? (
-        <div>
+        <div className={styles.content}>
+          <button onClick={handleOpen}>
+            {securityEnvData.current_travel_alarm}
+          </button>
+          <CustomModal isOpen={isOpen} handleClose={handleClose}>
+            <div className={styles.dangMap}>
+              <img src={localContactData.dang_map_download_url} alt="" />
+            </div>
+          </CustomModal>
+
           <div>국가명 : {basicData.countryName}</div>
           <div>영문명 : {basicData.countryEnName}</div>
           <div>대륙명 : {basicData.continent}</div>
@@ -54,16 +65,13 @@ function CountryInfo() {
               }}
             />
           </div>
-          <div>{securityEnvData.current_travel_alarm}</div>
+
           <div className={styles.contact}>
             <div
               dangerouslySetInnerHTML={{
                 __html: localContactData.contact_remark,
               }}
             />
-          </div>
-          <div>
-            <img src={localContactData.dang_map_download_url} alt="" />
           </div>
         </div>
       ) : basicData === undefined && value !== '' ? (

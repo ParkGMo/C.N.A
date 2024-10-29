@@ -1,22 +1,56 @@
 @import '/src/scss/mixin.scss';
 
 .searchBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
+  position: relative;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
+
+  > .icon {
+    @include flexCenter();
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    font-size: 24px;
+    transform: translateY(-50%);
+
+    > svg {
+      color: var(--common-color);
+      transition: 0.3s;
+    }
+  }
 
   > input {
     padding: 8px;
-    width: 80%;
-    border: 1px solid #ccc;
-  }
+    width: 100%;
+    border-radius: 9999px;
+    border: 1px solid var(--common-color);
+    text-align: center;
+    background-color: #f9f9f9;
 
-  > button {
-    padding: 8px 16px;
-    width: 20%;
-    background-color: #ccc;
+    &::placeholder {
+      color: var(--placeholder-color);
+      transition: 0.3s;
+    }
+
+    &:hover {
+      background-color: #fff;
+      box-shadow: 0px 2px 4px 1px rgba(var(--common-color-rgb), 0.3);
+    }
+
+    &:focus {
+      border: 1px solid var(--hover-color);
+      background-color: #fff;
+      box-shadow: 0px 2px 4px 1px rgba(var(--accent-color-rgb), 0.3);
+
+      &::placeholder {
+        color: rgba(var(--accent-color-rgb), 0.3);
+      }
+
+      & + .icon {
+        > svg {
+          color: var(--hover-color);
+        }
+      }
+    }
   }
 }
