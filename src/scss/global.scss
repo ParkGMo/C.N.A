@@ -28,7 +28,19 @@ li {
 }
 
 body {
+  /* 기본 폰트 크기 */
+  font-size: 16px;
   color: #333;
+
+  /* 모바일 폰트 크기 */
+  @media (max-width: 767.98px) {
+    font-size: 14px;
+  }
+
+  /* 데스크톱 폰트 크기 */
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 }
 
 button,

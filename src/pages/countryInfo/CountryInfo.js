@@ -46,8 +46,22 @@ function CountryInfo() {
           <div>
             <img src={basicData.imgUrl} alt="" />
           </div>
+          <div className={styles.countryInfo}>
+            <h3>정보</h3>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: basicData.basic,
+              }}
+            />
+          </div>
           <div>{securityEnvData.current_travel_alarm}</div>
-          <div>{localContactData.contact_remark}</div>
+          <div className={styles.contact}>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: localContactData.contact_remark,
+              }}
+            />
+          </div>
           <div>
             <img src={localContactData.dang_map_download_url} alt="" />
           </div>

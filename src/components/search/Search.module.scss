@@ -1,0 +1,22 @@
+@import '/src/scss/mixin.scss';
+
+.searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+  width: 80%;
+
+  > input {
+    padding: 8px;
+    width: 80%;
+    border: 1px solid #ccc;
+  }
+
+  > button {
+    padding: 8px 16px;
+    width: 20%;
+    background-color: #ccc;
+  }
+}
