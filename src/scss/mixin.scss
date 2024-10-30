@@ -1,5 +1,38 @@
+/* 플렉스 가운데 정렬 */
 @mixin flexCenter() {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* 알약 스타일 */
+@mixin PillStyle(
+  $padding: 8px 16px,
+  $bgColor: var(--common-color),
+  $color: var(--main-color)
+) {
+  padding: $padding;
+  border-radius: 9999px;
+  background-color: $bgColor;
+  color: $color;
+}
+
+/* 텍스트 마커 (형광펜 스타일) */
+@mixin marker($left: -5px, $width: 110%) {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 4px;
+  width: fit-content;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: $left;
+    z-index: -1;
+    width: $width;
+    height: 15px;
+    transform: skew(-10deg);
+    background-color: rgba(var(--common-color-rgb), 0.6);
+  }
 }

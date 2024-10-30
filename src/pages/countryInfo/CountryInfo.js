@@ -28,7 +28,9 @@ function CountryInfo() {
     const fetchSecurityEnvInfoData = await securityEnvInfoData(isoCode2);
     const fetchLocalContactInfoData = await localContactInfoData(isoCode2);
 
-    setBasicData(fetchBasicData);
+    if (fetchBasicData) {
+      setBasicData(fetchBasicData);
+    }
     setSecurityEnvData(fetchSecurityEnvInfoData);
     setLocalContactData(fetchLocalContactInfoData);
   }, [value]);
@@ -37,26 +39,55 @@ function CountryInfo() {
     handleLoad();
   }, [value, handleLoad]);
 
+  const travelAlarmColor = (alarm) => {
+    if (alarm.includes('1단계')) {
+      return styles.attention;
+    } else if (alarm.includes('2단계')) {
+      return styles.refrainment;
+    } else if (alarm.includes('3단계')) {
+      return styles.recommendation;
+    } else if (alarm.includes('4단계')) {
+      return styles.forbid;
+    } else if (alarm === 'normal') {
+      return styles.normal;
+    } else {
+      return styles.specialAadvisory;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Search value={value} setValue={setValue} />
       {basicData && value !== '' ? (
         <div className={styles.content}>
-          <button onClick={handleOpen}>
-            {securityEnvData.current_travel_alarm}
-          </button>
-          <CustomModal isOpen={isOpen} handleClose={handleClose}>
-            <div className={styles.dangMap}>
-              <img src={localContactData.dang_map_download_url} alt="" />
+          {/* 국가 기본 정보 */}
+          <div className={styles.basicInfo}>
+            <div className={styles.flag}>
+              <img src={basicData.imgUrl} alt="" />
             </div>
-          </CustomModal>
-
-          <div>국가명 : {basicData.countryName}</div>
-          <div>영문명 : {basicData.countryEnName}</div>
-          <div>대륙명 : {basicData.continent}</div>
-          <div>
-            <img src={basicData.imgUrl} alt="" />
+            <div className={styles.locationInfo}>
+              <span>[{basicData.continent}]</span>
+              <h2>{basicData.countryName}</h2>
+              <h3>{basicData.countryEnName}</h3>
+              {/* 여행 경보 */}
+              <div className={styles.travelAlarm}>
+                <button
+                  className={travelAlarmColor(
+                    securityEnvData?.current_travel_alarm || 'normal'
+                  )}
+                  onClick={handleOpen}
+                >
+                  {securityEnvData?.current_travel_alarm || '여행경보단계 조회'}
+                </button>
+                <CustomModal isOpen={isOpen} handleClose={handleClose}>
+                  <div className={styles.dangMap}>
+                    <img src={localContactData.dang_map_download_url} alt="" />
+                  </div>
+                </CustomModal>
+              </div>
+            </div>
           </div>
+          {/* 국가 상세 정보 */}
           <div className={styles.countryInfo}>
             <h3>정보</h3>
             <div
@@ -65,7 +96,7 @@ function CountryInfo() {
               }}
             />
           </div>
-
+          {/* 대사관 연락처 및 신고 */}
           <div className={styles.contact}>
             <div
               dangerouslySetInnerHTML={{

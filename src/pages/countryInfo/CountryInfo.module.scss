@@ -1,11 +1,155 @@
+@import '/src/scss/mixin.scss';
+
 .container {
   .content {
-    .dangMap {
-      width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
 
-      > img {
-        width: 100%;
+    .basicInfo {
+      display: flex;
+      gap: 16px;
+
+      .flag {
+        @include flexCenter();
+        width: 45%;
+
+        > img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+      .locationInfo {
+        flex: 1 1;
+        > h2 {
+          font-size: 20px;
+        }
+        > h3 {
+          font-size: 14px;
+          color: #cdcdcd;
+        }
+        > span {
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .travelAlarm {
+          margin-top: 8px;
+          text-align: right;
+          > button {
+            @include PillStyle();
+            font-size: 14px;
+
+            &.normal {
+              &:hover {
+                background-color: var(--common-hover-color);
+              }
+            }
+
+            &.attention {
+              background-color: #2a528a;
+
+              &:hover {
+                background-color: #002c5f;
+              }
+            }
+
+            &.refrainment {
+              background-color: #fbaf5b;
+
+              &:hover {
+                background-color: #cc8633;
+              }
+            }
+
+            &.recommendation {
+              background-color: #ce3e43;
+
+              &:hover {
+                background-color: #a91429;
+              }
+            }
+
+            &.forbid {
+              background-color: #52524e;
+
+              &:hover {
+                background-color: #1f1f1c;
+              }
+            }
+
+            &.specialAadvisory {
+              background-color: #df6a6a;
+
+              &:hover {
+                background-color: #bb4b4e;
+              }
+            }
+          }
+        }
       }
     }
+
+    .countryInfo {
+      > h3 {
+        @include marker($width: 120%);
+      }
+      > div > div {
+        word-break: keep-all;
+        white-space: wrap;
+        > p {
+          word-break: keep-all;
+          white-space: wrap;
+          font-weight: 600;
+          color: var(--accent-color);
+        }
+      }
+    }
+
+    .contact {
+      h3 {
+        @include marker();
+      }
+      a {
+        font-weight: 500;
+        color: var(--point-color);
+
+        &:hover {
+          color: var(--point-hover-color);
+          text-decoration: underline;
+        }
+      }
+      p {
+        line-height: 1.6;
+        word-break: keep-all;
+        white-space: wrap;
+        font-weight: 500;
+        color: var(--accent-color);
+      }
+      > div {
+        line-height: 1.6;
+        word-break: keep-all;
+        white-space: wrap;
+      }
+
+      img {
+        margin-top: 4px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.dangMap {
+  width: 100%;
+  height: 800px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
