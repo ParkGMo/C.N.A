@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+
+  .content {
+    width: 100%;
+    .basicInfo {
+      > div {
+        width: 100%;
+      }
+
+      img {
+        width: 50%;
+      }
+    }
+  }
+}

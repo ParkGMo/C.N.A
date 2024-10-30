@@ -1,0 +1,106 @@
+@import '/src/scss/mixin.scss';
+
+.basicInfo {
+  display: flex;
+  gap: 16px;
+
+  .flag {
+    @include flexCenter();
+    width: 45%;
+
+    > img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  .locationInfo {
+    flex: 1 1;
+    > h2 {
+      font-size: 20px;
+    }
+    > h3 {
+      font-size: 14px;
+      color: #cdcdcd;
+    }
+    > span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .travelAlarm {
+      margin-top: 8px;
+      text-align: right;
+
+      > .alarm {
+        @include PillStyle();
+        font-size: 14px;
+
+        &.attention {
+          background-color: #2a528a;
+        }
+
+        &.refrainment {
+          background-color: #fbaf5b;
+        }
+
+        &.recommendation {
+          background-color: #ce3e43;
+        }
+
+        &.forbid {
+          background-color: #52524e;
+        }
+
+        &.specialAadvisory {
+          background-color: #df6a6a;
+        }
+      }
+
+      > button.alarm {
+        &.normal {
+          &:hover {
+            background-color: var(--common-hover-color);
+          }
+        }
+        &.attention {
+          &:hover {
+            background-color: #002c5f;
+          }
+        }
+        &.refrainment {
+          &:hover {
+            background-color: #cc8633;
+          }
+        }
+        &.recommendation {
+          &:hover {
+            background-color: #a91429;
+          }
+        }
+
+        &.forbid {
+          &:hover {
+            background-color: #1f1f1c;
+          }
+        }
+
+        &.specialAadvisory {
+          &:hover {
+            background-color: #bb4b4e;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dangMap {
+  width: 100%;
+  height: 800px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
