@@ -9,11 +9,11 @@
 
     .basicInfo {
       display: flex;
-      gap: 8px;
+      gap: 16px;
 
       .flag {
         @include flexCenter();
-        width: 40%;
+        width: 45%;
 
         > img {
           width: 100%;
@@ -21,6 +21,7 @@
         }
       }
       .locationInfo {
+        flex: 1 1;
         > h2 {
           font-size: 20px;
         }
@@ -34,6 +35,8 @@
         }
 
         .travelAlarm {
+          margin-top: 8px;
+          text-align: right;
           > button {
             @include PillStyle();
             font-size: 14px;
@@ -111,6 +114,11 @@
       a {
         font-weight: 500;
         color: var(--point-color);
+
+        &:hover {
+          color: var(--point-hover-color);
+          text-decoration: underline;
+        }
       }
       p {
         line-height: 1.6;

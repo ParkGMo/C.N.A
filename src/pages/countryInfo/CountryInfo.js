@@ -28,7 +28,9 @@ function CountryInfo() {
     const fetchSecurityEnvInfoData = await securityEnvInfoData(isoCode2);
     const fetchLocalContactInfoData = await localContactInfoData(isoCode2);
 
-    setBasicData(fetchBasicData);
+    if (fetchBasicData) {
+      setBasicData(fetchBasicData);
+    }
     setSecurityEnvData(fetchSecurityEnvInfoData);
     setLocalContactData(fetchLocalContactInfoData);
   }, [value]);
