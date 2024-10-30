@@ -1,0 +1,35 @@
+@import '/src/scss/mixin.scss';
+
+.contact {
+  h3 {
+    @include marker();
+  }
+  a {
+    font-weight: 500;
+    color: var(--point-color);
+
+    &:hover {
+      color: var(--point-hover-color);
+      text-decoration: underline;
+    }
+  }
+  p {
+    line-height: 1.6;
+    word-break: keep-all;
+    white-space: wrap;
+    font-weight: 500;
+    color: var(--accent-color);
+  }
+  > div {
+    line-height: 1.6;
+    word-break: keep-all;
+    white-space: wrap;
+  }
+
+  img {
+    margin-top: 4px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

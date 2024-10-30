@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
 import styles from './Search.module.scss';
 
-function Search({ value, setValue }) {
+function Search({ value, setValue, placeholder = 'Search Keyword...' }) {
   const [searchValue, setSearchValue] = useState(value);
 
   const handleChangeValue = (e) => {
@@ -20,7 +20,7 @@ function Search({ value, setValue }) {
         type="text"
         value={searchValue}
         onChange={handleChangeValue}
-        placeholder="검색어를 입력해주세요."
+        placeholder={placeholder}
       />
       <span className={styles.icon}>
         <RiSearchLine />

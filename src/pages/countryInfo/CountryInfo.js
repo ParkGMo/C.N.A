@@ -1,111 +1,46 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import {
-  basicInfoData,
-  localContactInfoData,
-  securityEnvInfoData,
-} from '../../api/basicInfo';
-import CustomModal from '../../components/layout/custom-modal/CustomModal';
-import Search from '../../components/search/Search';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { convertCodeISO2, convertCodeISO3 } from '../../lib/convertIsoCode';
-import { randomCountryName } from '../../utils/randomCountryName';
+import { fetchCountryInfoData } from '../../store/countryInfo/coutryInfoSlice';
+import CountryBasicInfo from './country-basic-info/CountryBasicInfo';
+import CountryContactInfo from './country-contact-info/CountryContactInfo';
+import CountryDetailInfo from './country-detail-info/CountryDetailInfo';
 import styles from './CountryInfo.module.scss';
 
 function CountryInfo() {
-  const [basicData, setBasicData] = useState([]);
-  const [securityEnvData, setSecurityEnvData] = useState([]);
-  const [localContactData, setLocalContactData] = useState([]);
-  const [value, setValue] = useState(randomCountryName());
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const keyword = location.state?.keyword || null;
 
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const { basicData, securityEnvData, localContactData } = useSelector(
+    (state) => state.countryInfoSlice
+  );
 
-  const handleLoad = useCallback(async () => {
-    const isoCode2 = convertCodeISO2(value);
-    const isoCode3 = convertCodeISO3(value);
-
-    const fetchBasicData = await basicInfoData(isoCode3);
-    const fetchSecurityEnvInfoData = await securityEnvInfoData(isoCode2);
-    const fetchLocalContactInfoData = await localContactInfoData(isoCode2);
-
-    if (fetchBasicData) {
-      setBasicData(fetchBasicData);
-    }
-    setSecurityEnvData(fetchSecurityEnvInfoData);
-    setLocalContactData(fetchLocalContactInfoData);
-  }, [value]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    handleLoad();
-  }, [value, handleLoad]);
+    const isoCode2 = convertCodeISO2(keyword);
+    const isoCode3 = convertCodeISO3(keyword);
 
-  const travelAlarmColor = (alarm) => {
-    if (alarm.includes('1단계')) {
-      return styles.attention;
-    } else if (alarm.includes('2단계')) {
-      return styles.refrainment;
-    } else if (alarm.includes('3단계')) {
-      return styles.recommendation;
-    } else if (alarm.includes('4단계')) {
-      return styles.forbid;
-    } else if (alarm === 'normal') {
-      return styles.normal;
-    } else {
-      return styles.specialAadvisory;
-    }
-  };
+    dispatch(fetchCountryInfoData([isoCode3, isoCode2, isoCode2]));
+  }, [keyword, dispatch]);
 
   return (
     <div className={styles.container}>
-      <Search value={value} setValue={setValue} />
-      {basicData && value !== '' ? (
+      {basicData && keyword !== '' ? (
         <div className={styles.content}>
           {/* 국가 기본 정보 */}
-          <div className={styles.basicInfo}>
-            <div className={styles.flag}>
-              <img src={basicData.imgUrl} alt="" />
-            </div>
-            <div className={styles.locationInfo}>
-              <span>[{basicData.continent}]</span>
-              <h2>{basicData.countryName}</h2>
-              <h3>{basicData.countryEnName}</h3>
-              {/* 여행 경보 */}
-              <div className={styles.travelAlarm}>
-                <button
-                  className={travelAlarmColor(
-                    securityEnvData?.current_travel_alarm || 'normal'
-                  )}
-                  onClick={handleOpen}
-                >
-                  {securityEnvData?.current_travel_alarm || '여행경보단계 조회'}
-                </button>
-                <CustomModal isOpen={isOpen} handleClose={handleClose}>
-                  <div className={styles.dangMap}>
-                    <img src={localContactData.dang_map_download_url} alt="" />
-                  </div>
-                </CustomModal>
-              </div>
-            </div>
-          </div>
+          <CountryBasicInfo
+            basicData={basicData}
+            travelAlarm={securityEnvData?.current_travel_alarm}
+            dangMap={localContactData.dang_map_download_url}
+          />
           {/* 국가 상세 정보 */}
-          <div className={styles.countryInfo}>
-            <h3>정보</h3>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: basicData.basic,
-              }}
-            />
-          </div>
+          <CountryDetailInfo detail={basicData.basic} />
           {/* 대사관 연락처 및 신고 */}
-          <div className={styles.contact}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: localContactData.contact_remark,
-              }}
-            />
-          </div>
+          <CountryContactInfo contact={localContactData.contact_remark} />
         </div>
-      ) : basicData === undefined && value !== '' ? (
+      ) : basicData === undefined && keyword !== '' ? (
         <div>
           <p>해당 국가에 대한 정보가 없습니다.</p>
           <span>검색어를 다시 한 번 확인해주세요!</span>

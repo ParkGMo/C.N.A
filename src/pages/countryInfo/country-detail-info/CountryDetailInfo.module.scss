@@ -1,0 +1,17 @@
+@import '/src/scss/mixin.scss';
+
+.countryInfo {
+  > h3 {
+    @include marker($width: 120%);
+  }
+  > div > div {
+    word-break: keep-all;
+    white-space: wrap;
+    > p {
+      word-break: keep-all;
+      white-space: wrap;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+  }
+}
