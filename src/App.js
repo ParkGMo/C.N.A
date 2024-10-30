@@ -6,6 +6,7 @@ import CountryInfo from "./pages/countryInfo/CountryInfo";
 import Intro from "./pages/intro/Intro";
 import "./scss/global.scss";
 import PriceIndex1 from "./components/priceIndex/PriceIndex1";
+import WorldPriceIndex from "./components/priceIndex/WorldPriceIndex";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route index element={<Intro />} />
           <Route path="country-info" element={<CountryInfo />} />
           <Route path="exchange-rate" element={<ExchageRate />} />
-          <Route path="price-index" element={<PriceIndex1 />} />
+          <Route path="price-index" element={<WorldPriceIndex />} />
         </Route>
       </Routes>
     </Router>
