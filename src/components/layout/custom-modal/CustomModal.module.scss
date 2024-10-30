@@ -1,4 +1,7 @@
+@import '/src/scss/mixin.scss';
+
 .content {
+  @include flexCenter();
   position: relative;
   top: 50%;
   left: 50%;
