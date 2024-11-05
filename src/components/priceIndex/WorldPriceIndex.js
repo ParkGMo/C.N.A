@@ -13,6 +13,7 @@ function WorldPriceIndex() {
   };
   const handleLoad = async () => {
     // const ISO2 = `KR`;
+    //   https://datahelpdesk.worldbank.org/knowledgebase/topics/125589
     const url = `https://api.worldbank.org/v2/country/${ISO2}/indicator/FP.CPI.TOTL?format=json`;
     try {
       const response = await fetch(url);
