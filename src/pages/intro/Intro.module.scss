@@ -8,11 +8,18 @@
     width: 100%;
     .basicInfo {
       > div {
-        width: 100%;
+        width: 50%;
+
+        &:last-child {
+          text-align: center;
+          > div {
+            text-align: center;
+          }
+        }
       }
 
       img {
-        width: 50%;
+        width: 100%;
       }
     }
   }

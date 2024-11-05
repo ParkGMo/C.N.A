@@ -15,7 +15,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Intro />} />
-          <Route path="country-info" element={<CountryInfo />} />
           <Route path="exchange-rate" element={<ExchageRate />} />
           <Route path="price-index" element={<PriceIndex1 />} />
           <Route path="sources" element={<SourcesInfo />} />

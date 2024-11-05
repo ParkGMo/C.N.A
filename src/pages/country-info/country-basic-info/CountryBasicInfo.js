@@ -31,12 +31,12 @@ function CountryBasicInfo({ basicData, travelAlarm, dangMap, className }) {
   return (
     <div className={cn(styles.basicInfo, className)}>
       <div className={styles.flag}>
-        <img src={basicData.imgUrl} alt="" />
+        <img src={basicData?.imgUrl} alt="" />
       </div>
       <div className={styles.locationInfo}>
-        <span>[{basicData.continent}]</span>
-        <h2>{basicData.countryName}</h2>
-        <h3>{basicData.countryEnName}</h3>
+        <span>[{basicData?.continent}]</span>
+        <h2>{basicData?.countryName}</h2>
+        <h3>{basicData?.countryEnName}</h3>
         {/* 여행 경보 */}
         <div className={styles.travelAlarm}>
           {pathname === '/' ? (
