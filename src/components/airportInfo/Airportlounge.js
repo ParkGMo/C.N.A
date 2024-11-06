@@ -1,65 +1,100 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  localTraveler2019,
+  localTraveler2023,
+  localTraveler2024,
+} from "../../lib/overseasDestinationData";
+import ChartLine from "../chart/ChartLine"; // 이전에 작성한 ChartLine 컴포넌트
 import ChartBar from "../chart/ChartBar";
 import ChartDouqhut from "../chart/ChartDouqhut";
-import ChartLine from "../chart/ChartLine";
 
-function Airportlounge(props) {
-  const [loungeData, setLoungeData] = useState([]);
-  console.log(loungeData);
+function AirportLounge() {
+  const [selectedYear, setSelectedYear] = useState("2019년"); // 초기값은 2019년
+  const [data, setData] = useState([]);
+  console.log(data);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
-  const handleload = async () => {
-    const api = `3uV1glFcu16EEfom2KpoJ4u%2BMLT6tdPXRrpCDmu3%2BI2VwJf0YHH9wfoR5Ivst9F8dAxRXrsROofN1FmukSPjmA%3D%3D`;
-    const url = `https://api.odcloud.kr/api/15002711/v1/uddi:37ebe8d5-268f-4b25-a967-c64c586fdda3?page=1&perPage=10&serviceKey=${api}`;
-    const lounge = await fetch(url).then((res) => res.json());
-    setLoungeData(lounge.data);
-    console.log(lounge);
-    // fetch(`https: //infuser.odcloud.kr/oas/docs?namespace=15002711/v1`).then(
-    //   (respone) => {
-    //     console.log(respone.text());
-    //   }
-    // );
+  // 년도별 데이터 로딩 함수
+  const loadData = (year) => {
+    switch (year) {
+      case "2019년":
+        return localTraveler2019();
+      case "2023년":
+        return localTraveler2023();
+      case "2024년":
+        return localTraveler2024();
+      default:
+        return [];
+    }
   };
+
   useEffect(() => {
-    handleload();
-  }, []);
-  const datasets = [
-    {
-      label: "발권데스크",
-      dataKey: "발권데스크",
-      backgroundColor: "rgba(255, 99, 132, 0.2)",
-      borderColor: "rgba(255, 99, 132, 1)",
-    },
-    {
-      label: "셀프체크인 키오스크",
-      dataKey: ["셀프체크인 키오스크"],
-      backgroundColor: "rgba(54, 162, 235, 0.2)",
-      borderColor: "rgba(54, 162, 235, 1)",
-    },
-    {
-      label: "카운터",
-      dataKey: "카운터",
-      backgroundColor: "rgba(75, 192, 192, 0.2)",
-      borderColor: "rgba(75, 192, 192, 1)",
-    },
-    {
-      label: "컨베이어벨트",
-      dataKey: "컨베이어벨트",
-      backgroundColor: "rgb(100, 255, 218, 0.2)",
-      borderColor: "rgb(100, 255, 218, 1)",
-    },
-  ];
+    const loadedData = loadData(selectedYear);
+    setData(loadedData); // 데이터를 상태에 저장
+  }, [selectedYear]);
+
+  // 국가 선택 핸들러
+  const handleCountrySelection = (event) => {
+    const selectedOptions = Array.from(event.target.selectedOptions).map(
+      (option) => option.value
+    );
+    setSelectedCountries(selectedOptions);
+  };
+
+  // 선택된 국가와 년도에 맞는 데이터 필터링
+  const filteredData = data.filter((item) =>
+    selectedCountries.includes(item.country)
+  );
+
   return (
     <div>
-      Airportlounge
-      {/* <ChartBar data={loungeData} datasets={datasets} /> */}
-      {/* <ChartDouqhut
-        data={loungeData}
-        label={"셀프체크인 키오스크"}
-        dataKey={"셀프체크인 키오스크"}
-      /> */}
-      {/* <ChartLine data={loungeData} label={"카운터"} dataKey={"카운터"} /> */}
+      <h1>국가별 출국자 수</h1>
+
+      {/* 국가 선택 (드롭다운) */}
+      <div>
+        <h3>국가 선택:</h3>
+        <select
+          multiple
+          value={selectedCountries}
+          onChange={handleCountrySelection}
+        >
+          {data.length > 0 ? (
+            data.map((countryData) => (
+              <option key={countryData.country} value={countryData.country}>
+                {countryData.country}
+              </option>
+            ))
+          ) : (
+            <option disabled>데이터가 없습니다</option>
+          )}
+        </select>
+      </div>
+
+      {/* 년도 선택 (드롭다운) */}
+      <div>
+        <h3>년도 선택:</h3>
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+        >
+          <option value="2019년">2019년</option>
+          <option value="2023년">2023년</option>
+          <option value="2024년">2024년</option>
+        </select>
+      </div>
+
+      {/* 차트 컴포넌트 */}
+      {selectedCountries.length > 0 && (
+        // <ChartLine
+        //   data={filteredData}
+        //   label={`출국자 수 (${selectedYear})`}
+        //   dataKey="date" // 월별 데이터를 기반으로 그리기
+        // />
+        <ChartBar data={filteredData} />
+        // <ChartDouqhut data={filteredData} />
+      )}
     </div>
   );
 }
 
-export default Airportlounge;
+export default AirportLounge;

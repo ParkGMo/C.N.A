@@ -1,7 +1,7 @@
-import { monthMap } from './changeNames';
-import overseasDestination2019 from './overseasDestination2019.json';
-import overseasDestination2023 from './overseasDestination2023.json';
-import overseasDestination2024 from './overseasDestination2024.json';
+import { monthMap } from "./changeNames";
+import overseasDestination2019 from "./overseasDestination2019.json";
+import overseasDestination2023 from "./overseasDestination2023.json";
+import overseasDestination2024 from "./overseasDestination2024.json";
 
 // 2019년 1월 ~ 2019년 12월 데이터
 export function localTraveler2019() {
@@ -10,12 +10,12 @@ export function localTraveler2019() {
   const result = [];
 
   data.forEach((item) => {
-    const country = item['행선국(도착지별)'];
+    const country = item["행선국(도착지별)"];
     const formattedData = {
       country,
       date: Object.keys(item).reduce((acc, key) => {
-        if (key !== '행선국(도착지별)') {
-          const monthKey = key.split('-')[1];
+        if (key !== "행선국(도착지별)") {
+          const monthKey = key.split("-")[1];
           const monthAbbr = monthKey.toLowerCase();
           if (monthAbbr) {
             acc.push({ [monthAbbr]: item[key] });
@@ -38,12 +38,12 @@ export function localTraveler2023() {
   const result = [];
 
   data.forEach((item) => {
-    const country = item['행선국(도착지별)'];
+    const country = item["행선국(도착지별)"];
     const formattedData = {
       country,
       date: Object.keys(item).reduce((acc, key) => {
-        if (key !== '행선국(도착지별)') {
-          const monthKey = key.split(' ')[1];
+        if (key !== "행선국(도착지별)") {
+          const monthKey = key.split(" ")[1];
           const monthAbbr = monthMap[monthKey];
           if (monthAbbr) {
             acc.push({ [monthAbbr]: item[key] });
