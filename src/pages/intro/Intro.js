@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Airportlounge from '../../components/airportInfo/Airportlounge';
 import Card from '../../components/layout/card/Card';
 import { convertCodeISO2, convertCodeISO3 } from '../../lib/convertIsoCode';
-import { fetchCountryInfoData } from '../../store/countryInfo/coutryInfoSlice';
+import { fetchCountryInfoData } from '../../store/country-info-slice/countryInfoSlice';
 import { randomCountryName } from '../../utils/randomCountryName';
 import CountryBasicInfo from '../country-info/country-basic-info/CountryBasicInfo';
 import styles from './Intro.module.scss';

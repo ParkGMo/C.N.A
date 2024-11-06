@@ -1,21 +1,7 @@
+import { monthMap } from './changeNames';
 import overseasDestination2019 from './overseasDestination2019.json';
 import overseasDestination2023 from './overseasDestination2023.json';
 import overseasDestination2024 from './overseasDestination2024.json';
-
-const monthMap = {
-  '1월': 'jan',
-  '2월': 'feb',
-  '3월': 'mar',
-  '4월': 'apr',
-  '5월': 'may',
-  '6월': 'jun',
-  '7월': 'jul',
-  '8월': 'aug',
-  '9월': 'sep',
-  '10월': 'oct',
-  '11월': 'nov',
-  '12월': 'dec',
-};
 
 // 2019년 1월 ~ 2019년 12월 데이터
 export function localTraveler2019() {

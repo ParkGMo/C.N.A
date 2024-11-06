@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { convertCodeISO2, convertCodeISO3 } from '../../lib/convertIsoCode';
-import { fetchCountryInfoData } from '../../store/countryInfo/coutryInfoSlice';
+import { fetchCountryInfoData } from '../../store/country-info-slice/countryInfoSlice';
 import CountryBasicInfo from './country-basic-info/CountryBasicInfo';
 import CountryContactInfo from './country-contact-info/CountryContactInfo';
 import CountryDetailInfo from './country-detail-info/CountryDetailInfo';
