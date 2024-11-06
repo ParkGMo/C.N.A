@@ -63,7 +63,7 @@ function Intro() {
       <IATAICAO />
       <Airportlounge />
       <Card>
-        <Link to="">나라별 기본정보 검색하기</Link>
+        <Link to="/overseas-tourist">행선지별 관광객</Link>
       </Card>
       {/* <ChartBar /> */}
     </div>

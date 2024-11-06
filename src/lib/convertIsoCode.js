@@ -44,6 +44,7 @@ export function convertCodeISO2(countryName) {
     case `니카라과`:
       return `NI`;
     case `대만`:
+    case `타이완`:
       return `TW`;
     case `덴마크`:
       return `DK`;
@@ -445,6 +446,7 @@ export function convertCodeISO3(countryName) {
     case '니카라과':
       return 'NIC';
     case '대만':
+    case '타이완':
       return 'TWN';
     case '덴마크':
       return 'DNK';
