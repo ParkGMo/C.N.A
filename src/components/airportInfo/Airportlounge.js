@@ -4,17 +4,14 @@ import {
   localTraveler2023,
   localTraveler2024,
 } from "../../lib/overseasDestinationData";
-import ChartLine from "../chart/ChartLine"; // 이전에 작성한 ChartLine 컴포넌트
 import ChartBar from "../chart/ChartBar";
-import ChartDouqhut from "../chart/ChartDouqhut";
+import { monthMap } from "../../lib/changeNames"; // monthMap import
 
 function AirportLounge() {
-  const [selectedYear, setSelectedYear] = useState("2019년"); // 초기값은 2019년
+  const [selectedYear, setSelectedYear] = useState("2019년");
   const [data, setData] = useState([]);
-  console.log(data);
   const [selectedCountries, setSelectedCountries] = useState([]);
 
-  // 년도별 데이터 로딩 함수
   const loadData = (year) => {
     switch (year) {
       case "2019년":
@@ -29,11 +26,9 @@ function AirportLounge() {
   };
 
   useEffect(() => {
-    const loadedData = loadData(selectedYear);
-    setData(loadedData); // 데이터를 상태에 저장
+    setData(loadData(selectedYear));
   }, [selectedYear]);
 
-  // 국가 선택 핸들러
   const handleCountrySelection = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions).map(
       (option) => option.value
@@ -41,16 +36,40 @@ function AirportLounge() {
     setSelectedCountries(selectedOptions);
   };
 
-  // 선택된 국가와 년도에 맞는 데이터 필터링
   const filteredData = data.filter((item) =>
     selectedCountries.includes(item.country)
   );
+
+  const chartData = {
+    labels: Object.keys(monthMap), // 'jan' ~ 'dec' 배열을 라벨로 사용
+    datasets: filteredData.map((countryData) => {
+      const monthlyData = new Array(12).fill(0);
+
+      // 각 월 데이터를 monthlyData 배열의 올바른 위치에 삽입
+      countryData.date.forEach((entry) => {
+        const [month, value] = Object.entries(entry)[0];
+        const monthIndex = Object.keys(monthMap).findIndex(
+          (key) => monthMap[key] === month
+        );
+        if (monthIndex !== -1) {
+          monthlyData[monthIndex] = value;
+        }
+      });
+
+      return {
+        label: countryData.country,
+        data: monthlyData,
+        backgroundColor: "rgba(75, 192, 192, 0.4)", // 임의의 색상
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      };
+    }),
+  };
 
   return (
     <div>
       <h1>국가별 출국자 수</h1>
 
-      {/* 국가 선택 (드롭다운) */}
       <div>
         <h3>국가 선택:</h3>
         <select
@@ -70,7 +89,6 @@ function AirportLounge() {
         </select>
       </div>
 
-      {/* 년도 선택 (드롭다운) */}
       <div>
         <h3>년도 선택:</h3>
         <select
@@ -83,15 +101,10 @@ function AirportLounge() {
         </select>
       </div>
 
-      {/* 차트 컴포넌트 */}
-      {selectedCountries.length > 0 && (
-        // <ChartLine
-        //   data={filteredData}
-        //   label={`출국자 수 (${selectedYear})`}
-        //   dataKey="date" // 월별 데이터를 기반으로 그리기
-        // />
-        <ChartBar data={filteredData} />
-        // <ChartDouqhut data={filteredData} />
+      {selectedCountries.length > 0 && filteredData.length > 0 ? (
+        <ChartBar data={chartData} />
+      ) : (
+        <p>국가를 선택하거나 데이터를 확인하세요.</p>
       )}
     </div>
   );
