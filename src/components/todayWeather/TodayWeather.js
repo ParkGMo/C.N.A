@@ -2,12 +2,64 @@ import React, { useEffect, useState } from "react";
 import { randomCountryName } from "../../utils/randomCountryName";
 import Search from "../search/Search";
 import { convertCodeISO2 } from "../../lib/convertIsoCode";
+import styled from "./TodayWeather.scss";
+const initialData = {
+  coord: {
+    lon: 7.367,
+    lat: 45.133,
+  },
+  weather: [
+    {
+      id: 501,
+      main: "Rain",
+      description: "moderate rain",
+      icon: "10d",
+    },
+  ],
+  base: "stations",
+  main: {
+    temp: 284.2,
+    feels_like: 282.93,
+    temp_min: 283.06,
+    temp_max: 286.82,
+    pressure: 1021,
+    humidity: 60,
+    sea_level: 1021,
+    grnd_level: 910,
+  },
+  visibility: 10000,
+  wind: {
+    speed: 4.09,
+    deg: 121,
+    gust: 3.47,
+  },
+  rain: {
+    "1h": 2.73,
+  },
+  clouds: {
+    all: 83,
+  },
+  dt: 1726660758,
+  sys: {
+    type: 1,
+    id: 6736,
+    country: "IT",
+    sunrise: 1726636384,
+    sunset: 1726680975,
+  },
+  timezone: 7200,
+  id: 3165523,
+  name: "Province of Turin",
+  cod: 200,
+};
 
 function TodayWeather() {
   const [value, setValue] = useState(randomCountryName());
   const [ISO2, setISO2] = useState("");
   const [lat, setLat] = useState(36.328799);
   const [lon, setLon] = useState(127.4230707);
+  const [weatherData, setWeatherData] = useState(initialData);
+  const [icon, setIcon] = useState();
   const handleLoad = async () => {
     const apiKey = `6e3669d9ce0d4e84eddd41c90c38ab37`;
     // const lat = 36.328799;
@@ -16,7 +68,7 @@ function TodayWeather() {
     try {
       const response = await fetch(url);
       const result = await response.json();
-      console.log(result);
+      setWeatherData(result);
     } catch (error) {
       console.error(error);
     }
@@ -42,10 +94,28 @@ function TodayWeather() {
     changeISO(value);
     getLatLon();
   }, [value, lat]);
+  console.log(weatherData);
+
   return (
-    <div>
+    <div className={styled.weatherCard}>
       <Search value={value} setValue={setValue} />
-      TodayWeather
+      <div className={styled.weatherItem}>
+        <div className={styled.weatherCountry}>
+          {weatherData ? value : ""}
+          <span> {weatherData?.name}</span>
+        </div>
+        <div className={styled.weatherIcon}>
+          <img
+            src={`https://openweathermap.org/img/wn/${weatherData?.weather?.[0].icon}@2x.png`}
+          />
+        </div>
+        <div className={styled.weatherTemp}>
+          현재온도 : {weatherData?.main.temp}
+        </div>
+        <div className={styled.weatherMaxMin}>
+          {weatherData?.main.temp_min}/{weatherData?.main.temp_max}
+        </div>
+      </div>
     </div>
   );
 }
