@@ -16,9 +16,8 @@ import styles from './Intro.module.scss';
 function Intro() {
   const [value, setValue] = useState(randomCountryName());
 
-  const { basicData, securityEnvData, localContactData } = useSelector(
-    (state) => state.countryInfoSlice
-  );
+  const { basicData, securityEnvData, localContactData, countryFlagData } =
+    useSelector((state) => state.countryInfoSlice);
 
   const dispatch = useDispatch();
 
@@ -26,7 +25,9 @@ function Intro() {
     const isoCode2 = convertCodeISO2(value);
     const isoCode3 = convertCodeISO3(value);
 
-    dispatch(fetchCountryInfoData([isoCode3, isoCode2, isoCode2]));
+    dispatch(
+      fetchCountryInfoData([isoCode3, isoCode2, isoCode2, isoCode2, isoCode2])
+    );
   }, [value, dispatch]);
 
   return (
@@ -46,6 +47,7 @@ function Intro() {
           <Card>
             <CountryBasicInfo
               className={styles.basicInfo}
+              flagUrl={countryFlagData?.download_url}
               basicData={basicData}
               travelAlarm={securityEnvData?.current_travel_alarm}
               dangMap={localContactData?.dang_map_download_url}
@@ -61,7 +63,7 @@ function Intro() {
       <IATAICAO />
       <Airportlounge />
       <Card>
-        <Link to="country-info">나라별 기본정보 검색하기</Link>
+        <Link to="">나라별 기본정보 검색하기</Link>
       </Card>
       {/* <ChartBar /> */}
     </div>

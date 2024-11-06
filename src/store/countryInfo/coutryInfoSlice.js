@@ -3,8 +3,10 @@ import { countryInfoData } from '../../api/countryBasicInfos';
 
 const initialState = {
   basicData: [],
+  generalData: [],
   securityEnvData: [],
   localContactData: [],
+  countryFlagData: [],
   isLoading: false,
   error: null,
 };
@@ -24,6 +26,8 @@ const countryInfoSlice = createSlice({
         state.basicData = action.payload.basicData;
         state.localContactData = action.payload.localContactData;
         state.securityEnvData = action.payload.securityEnvData;
+        state.countryFlagData = action.payload.countryFlagData;
+        state.generalData = action.payload.generalData;
       })
       .addCase(fetchCountryInfoData.rejected, (state, action) => {
         state.isLoading = false;
@@ -35,23 +39,59 @@ const countryInfoSlice = createSlice({
 export const fetchCountryInfoData = createAsyncThunk(
   'countryInfoData/fetchCountryInfoData',
   async (isoCodes) => {
-    const [basicIsoCode, localContactIsoCode, securityEnvIsoCode] = isoCodes;
+    const [
+      basicIsoCode,
+      localContactIsoCode,
+      securityEnvIsoCode,
+      countryFlagIsoCode,
+      generalIsoCode,
+    ] = isoCodes;
+
+    const baseParams = {
+      numOfRows: 10,
+      pageNo: 1,
+    };
+
+    const countryFlagParams = {
+      returnType: 'JSON',
+      perPage: 10,
+      page: 1,
+    };
 
     try {
       const basicData = await countryInfoData(
         basicIsoCode,
-        'CountryBasicService/getCountryBasicList'
+        'CountryBasicService/getCountryBasicList',
+        baseParams
       );
       const localContactData = await countryInfoData(
         localContactIsoCode,
-        'LocalContactService2/getLocalContactList2'
+        'LocalContactService2/getLocalContactList2',
+        baseParams
       );
       const securityEnvData = await countryInfoData(
         securityEnvIsoCode,
-        'SecurityEnvironmentService/getSecurityEnvironmentList'
+        'SecurityEnvironmentService/getSecurityEnvironmentList',
+        baseParams
+      );
+      const countryFlagData = await countryInfoData(
+        countryFlagIsoCode,
+        'CountryFlagService2/getCountryFlagList2',
+        countryFlagParams
+      );
+      const generalData = await countryInfoData(
+        generalIsoCode,
+        'OverviewGnrlInfoService/getOverviewGnrlInfoList',
+        baseParams
       );
 
-      return { basicData, localContactData, securityEnvData };
+      return {
+        basicData,
+        localContactData,
+        securityEnvData,
+        countryFlagData,
+        generalData,
+      };
     } catch (error) {
       return error;
     }

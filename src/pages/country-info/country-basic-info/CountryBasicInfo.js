@@ -4,7 +4,13 @@ import { useLocation } from 'react-router-dom';
 import CustomModal from '../../../components/layout/custom-modal/CustomModal';
 import styles from './CountryBasicInfo.module.scss';
 
-function CountryBasicInfo({ basicData, travelAlarm, dangMap, className }) {
+function CountryBasicInfo({
+  basicData,
+  travelAlarm,
+  dangMap,
+  flagUrl,
+  className,
+}) {
   const { pathname } = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +37,7 @@ function CountryBasicInfo({ basicData, travelAlarm, dangMap, className }) {
   return (
     <div className={cn(styles.basicInfo, className)}>
       <div className={styles.flag}>
-        <img src={basicData?.imgUrl} alt="" />
+        <img src={flagUrl || null} alt="" />
       </div>
       <div className={styles.locationInfo}>
         <span>[{basicData?.continent}]</span>

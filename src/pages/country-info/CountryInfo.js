@@ -12,9 +12,13 @@ function CountryInfo() {
   const location = useLocation();
   const keyword = location.state?.keyword || null;
 
-  const { basicData, securityEnvData, localContactData } = useSelector(
-    (state) => state.countryInfoSlice
-  );
+  const {
+    basicData,
+    securityEnvData,
+    localContactData,
+    generalData,
+    countryFlagData,
+  } = useSelector((state) => state.countryInfoSlice);
 
   const dispatch = useDispatch();
 
@@ -22,7 +26,9 @@ function CountryInfo() {
     const isoCode2 = convertCodeISO2(keyword);
     const isoCode3 = convertCodeISO3(keyword);
 
-    dispatch(fetchCountryInfoData([isoCode3, isoCode2, isoCode2]));
+    dispatch(
+      fetchCountryInfoData([isoCode3, isoCode2, isoCode2, isoCode2, isoCode2])
+    );
   }, [keyword, dispatch]);
 
   return (
@@ -31,12 +37,13 @@ function CountryInfo() {
         <div className={styles.content}>
           {/* 국가 기본 정보 */}
           <CountryBasicInfo
+            flagUrl={countryFlagData?.download_url}
             basicData={basicData}
             travelAlarm={securityEnvData?.current_travel_alarm}
             dangMap={localContactData.dang_map_download_url}
           />
           {/* 국가 상세 정보 */}
-          <CountryDetailInfo detail={basicData.basic} />
+          <CountryDetailInfo detail={generalData} />
           {/* 대사관 연락처 및 신고 */}
           <CountryContactInfo contact={localContactData.contact_remark} />
         </div>
