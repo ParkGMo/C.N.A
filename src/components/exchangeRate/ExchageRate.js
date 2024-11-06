@@ -23,6 +23,7 @@ function ExchageRate() {
       console.error(error);
     }
   };
+
   useEffect(() => {
     handleLoad();
   }, []);

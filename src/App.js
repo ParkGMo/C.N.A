@@ -4,7 +4,7 @@ import ExchageRate from "./components/exchangeRate/ExchageRate";
 import SourcesInfo from "./components/layout/footer/sources-info/SourcesInfo";
 import Layout from "./components/layout/Layout";
 import PriceIndex1 from "./components/priceIndex/PriceIndex1";
-import CountryInfo from "./pages/countryInfo/CountryInfo";
+// import CountryInfo from "./pages/countryInfo/CountryInfo";
 import Intro from "./pages/intro/Intro";
 import "./scss/global.scss";
 import TodayWeather from "./components/todayWeather/TodayWeather";
