@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { overseasTouristData } from '../../api/overseasTourist';
 
 const initialState = {
-  touristStatsByAgeData: [],
-  touristStatsByGenderData: [],
+  touristStatsData: [],
   isLoading: false,
   error: null,
 };
@@ -19,9 +18,7 @@ const tourlistInfoSlice = createSlice({
       })
       .addCase(fetchOverseasTouristData.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.touristStatsByAgeData = action.payload.touristStatsByAgeData;
-        state.touristStatsByGenderData =
-          action.payload.touristStatsByGenderData;
+        state.touristStatsData = action.payload;
       })
       .addCase(fetchOverseasTouristData.rejected, (state, action) => {
         state.isLoading = false;
@@ -36,33 +33,29 @@ export const fetchOverseasTouristData = createAsyncThunk(
     try {
       const data = await overseasTouristData(yyyymm, portCode);
 
-      const StatByAgeData = [];
+      const result = [];
 
       data.forEach((item) => {
-        let existingAgeCd = StatByAgeData.find(
+        let existingAgeCd = result.find(
           (entry) => entry.ageCd === item.ageCd && entry.sex === item.sex
         );
 
         if (existingAgeCd) {
           existingAgeCd.num = Number(item.num);
         } else {
-          StatByAgeData.push({
+          result.push({
             port: item.port,
             ageCd: item.ageCd,
             num: Number(item.num),
-            gender: item.sex,
+            gender: item.sexCd,
             ym: item.ym,
           });
         }
       });
 
-      const touristStatsByAgeData = StatByAgeData.sort(
-        (a, b) => a.ageCd - b.ageCd
-      );
+      const touristStatsData = result.sort((a, b) => a.ageCd - b.ageCd);
 
-      const touristStatsByGenderData = data;
-
-      return { touristStatsByAgeData, touristStatsByGenderData };
+      return touristStatsData;
     } catch (error) {
       return `fetch Err: ${error}`;
     }
