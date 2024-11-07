@@ -59,7 +59,6 @@ function TodayWeather() {
   const [lat, setLat] = useState(36.328799);
   const [lon, setLon] = useState(127.4230707);
   const [weatherData, setWeatherData] = useState(initialData);
-  const [icon, setIcon] = useState();
   const handleLoad = async () => {
     const apiKey = `6e3669d9ce0d4e84eddd41c90c38ab37`;
     // const lat = 36.328799;
@@ -94,8 +93,6 @@ function TodayWeather() {
     changeISO(value);
     getLatLon();
   }, [value, lat]);
-  console.log(weatherData);
-
   return (
     <div className={styled.weatherCard}>
       <Search value={value} setValue={setValue} />
