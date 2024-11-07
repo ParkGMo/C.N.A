@@ -4,6 +4,7 @@
   > h3 {
     @include marker($width: 120%);
   }
+
   > div > div {
     word-break: keep-all;
     white-space: wrap;
@@ -12,6 +13,37 @@
       white-space: wrap;
       font-weight: 600;
       color: var(--accent-color);
+    }
+  }
+
+  .detailData {
+    margin-top: 8px;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+
+    tr {
+      th {
+        width: 20%;
+        border: 2px solid #fff;
+        background-color: rgba(var(--common-color-rgb), 0.4);
+      }
+      td {
+        padding: 16px;
+        border: 2px solid #fff;
+        background-color: rgba(var(--common-color-rgb), 0.05);
+
+        > span {
+          font-size: 16px;
+          font-weight: 500;
+          color: rgba(var(--accent-color-rgb), 0.5);
+        }
+      }
+      &:nth-child(odd) {
+        td {
+          background-color: rgba(var(--common-color-rgb), 0.15);
+        }
+      }
     }
   }
 }

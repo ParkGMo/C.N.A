@@ -1,7 +1,11 @@
 import React from 'react';
 
-function TouristsByDestination(props) {
-  return <div>행선지별 관광객</div>;
+function TouristsByDestination() {
+  return (
+    <div>
+      <h3>행선지별 관광객</h3>
+    </div>
+  );
 }
 
 export default TouristsByDestination;

@@ -21,7 +21,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--main-font);
+  font-family: var(--main-font) !important;
 }
 
 a {
@@ -71,4 +71,10 @@ input {
 
 button {
   cursor: pointer;
+}
+
+p {
+  line-height: 1.6;
+  word-break: keep-all;
+  white-space: wrap;
 }
