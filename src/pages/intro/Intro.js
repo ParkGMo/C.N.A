@@ -74,7 +74,7 @@ function Intro() {
         <TouristsByDestination country={value} />
       </Card>
       <Card>
-        <Link to="/overseas-tourist">행선지별 관광객</Link>
+        <Link to="/representative-destination">대표 관광지</Link>
       </Card>
       {/* <ChartBar /> */}
     </div>

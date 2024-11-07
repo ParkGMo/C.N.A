@@ -12,4 +12,15 @@ module.exports = function (app) {
       },
     })
   );
+
+  app.use(
+    '/googlePlaceSearch', // 기존 host 대신 사용할 경로
+    createProxyMiddleware({
+      target: 'https://maps.googleapis.com/maps/api/place/textsearch/json', // 기존 host
+      changeOrigin: true,
+      pathRewrite: {
+        '^/googlePlaceSearch': '',
+      },
+    })
+  );
 };
