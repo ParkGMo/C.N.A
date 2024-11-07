@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { randomCountryName } from "../../utils/randomCountryName";
+import { convertCodeISO2 } from "../../lib/convertIsoCode";
 
 function LocationTime() {
   const [value, setValue] = useState(randomCountryName());
@@ -37,7 +38,15 @@ function LocationTime() {
     changeISO(value);
     getNowLatLon();
   }, [value, lat, lon]);
-  return <div>LocationTime</div>;
+  return (
+    <div>
+      <div>
+        <h5>현재 위치</h5>
+        <p>{result.dateTime?.split("T")[0].replaceAll("-", " : ")}</p>
+        <p>{result.timeZone}</p>
+      </div>
+    </div>
+  );
 }
 
 export default LocationTime;
