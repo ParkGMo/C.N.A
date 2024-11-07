@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { randomCountryName } from "../../utils/randomCountryName";
 import Search from "../search/Search";
 import { convertCodeISO2 } from "../../lib/convertIsoCode";
-import styled from "./TodayWeather.scss";
+import styles from "./TodayWeather.module.scss";
 const initialData = {
   coord: {
     lon: 7.367,
@@ -61,8 +61,6 @@ function TodayWeather() {
   const [weatherData, setWeatherData] = useState(initialData);
   const handleLoad = async () => {
     const apiKey = `6e3669d9ce0d4e84eddd41c90c38ab37`;
-    // const lat = 36.328799;
-    // const lon = 127.4230707;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=kr`;
     try {
       const response = await fetch(url);
@@ -94,23 +92,25 @@ function TodayWeather() {
     getLatLon();
   }, [value, lat]);
   return (
-    <div className={styled.weatherCard}>
+    <div>
       <Search value={value} setValue={setValue} />
-      <div className={styled.weatherItem}>
-        <div className={styled.weatherCountry}>
-          {weatherData ? value : ""}
-          <span> {weatherData?.name}</span>
-        </div>
-        <div className={styled.weatherIcon}>
-          <img
-            src={`https://openweathermap.org/img/wn/${weatherData?.weather?.[0].icon}@2x.png`}
-          />
-        </div>
-        <div className={styled.weatherTemp}>
-          현재온도 : {weatherData?.main.temp}
-        </div>
-        <div className={styled.weatherMaxMin}>
-          {weatherData?.main.temp_min}/{weatherData?.main.temp_max}
+      <div className={styles.weatherCard}>
+        <div className={styles.weatherItem}>
+          <div className={styles.weatherCountry}>
+            {weatherData ? value : ""}
+            <span> {weatherData?.name}</span>
+          </div>
+          <div className={styles.weatherIcon}>
+            <img
+              src={`https://openweathermap.org/img/wn/${weatherData?.weather?.[0].icon}@2x.png`}
+            />
+          </div>
+          <div className={styles.weatherTemp}>
+            현재온도 : {weatherData?.main.temp}
+          </div>
+          <div className={styles.weatherMaxMin}>
+            {weatherData?.main.temp_min}/{weatherData?.main.temp_max}
+          </div>
         </div>
       </div>
     </div>
