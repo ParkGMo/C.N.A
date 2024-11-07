@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AirportInfo from '../../components/airportInfo/AirportInfo';
-import IATAICAO from '../../components/IATAICAO/IATAICAO';
-import Search from '../../components/search/Search';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import AirportInfo from "../../components/airportInfo/AirportInfo";
+import IATAICAO from "../../components/IATAICAO/IATAICAO";
+import Search from "../../components/search/Search";
 // import TravelAvisorAPI from "../../components/travelAdvisor/TravelAvisorAPI";s
-import { useDispatch, useSelector } from 'react-redux';
-import Airportlounge from '../../components/airportInfo/Airportlounge';
-import Card from '../../components/layout/card/Card';
-import { convertCodeISO2, convertCodeISO3 } from '../../lib/convertIsoCode';
-import { fetchCountryInfoData } from '../../store/country-info-slice/countryInfoSlice';
-import { randomCountryName } from '../../utils/randomCountryName';
-import CountryBasicInfo from '../country-info/country-basic-info/CountryBasicInfo';
-import styles from './Intro.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import Airportlounge from "../../components/airportInfo/Airportlounge";
+import Card from "../../components/layout/card/Card";
+import { convertCodeISO2, convertCodeISO3 } from "../../lib/convertIsoCode";
+import { fetchCountryInfoData } from "../../store/country-info-slice/countryInfoSlice";
+import { randomCountryName } from "../../utils/randomCountryName";
+import CountryBasicInfo from "../country-info/country-basic-info/CountryBasicInfo";
+import styles from "./Intro.module.scss";
+import Overseas from "../../components/airportInfo/Overseas";
 
 function Intro() {
   const [value, setValue] = useState(randomCountryName());
@@ -40,7 +41,7 @@ function Intro() {
       <div className={styles.container}>
         <Link
           className={styles.content}
-          to={'/country-info'}
+          to={"/country-info"}
           state={{ keyword: value }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -62,6 +63,7 @@ function Intro() {
       <AirportInfo />
       <IATAICAO />
       <Airportlounge />
+      <Overseas />
       <Card>
         <Link to="/overseas-tourist">행선지별 관광객</Link>
       </Card>
