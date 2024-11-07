@@ -4,6 +4,7 @@ import AirportInfo from '../../components/airportInfo/AirportInfo';
 import IATAICAO from '../../components/IATAICAO/IATAICAO';
 import Search from '../../components/search/Search';
 // import TravelAvisorAPI from "../../components/travelAdvisor/TravelAvisorAPI";s
+import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import Overseas from '../../components/airportInfo/Overseas';
 import Card from '../../components/layout/card/Card';
@@ -39,22 +40,27 @@ function Intro() {
         placeholder="국가를 검색해주세요."
       />
       <div className={styles.container}>
-        <Link
-          className={styles.content}
-          to={'/country-info'}
-          state={{ keyword: value }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Card>
-            <CountryBasicInfo
-              className={styles.basicInfo}
-              flagUrl={countryFlagData?.download_url}
-              basicData={basicData}
-              travelAlarm={securityEnvData?.current_travel_alarm}
-              dangMap={localContactData?.dang_map_download_url}
-            />
-          </Card>
-        </Link>
+        <div className={cn(styles.content, styles.flex)}>
+          <Link
+            className={styles.countryInfo}
+            to={'/country-info'}
+            state={{ keyword: value }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Card>
+              <CountryBasicInfo
+                className={styles.basicInfo}
+                flagUrl={countryFlagData?.download_url}
+                basicData={basicData}
+                travelAlarm={securityEnvData?.current_travel_alarm}
+                dangMap={localContactData?.dang_map_download_url}
+              />
+            </Card>
+          </Link>
+          <Link to={'/exchange-rate'} className={styles.exchangeRateInfo}>
+            <Card>환율</Card>
+          </Link>
+        </div>
         <div className={styles.content}>
           <Card>날씨, 시차 정보</Card>
         </div>

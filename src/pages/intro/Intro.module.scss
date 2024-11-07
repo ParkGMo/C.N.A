@@ -6,21 +6,39 @@
 
   .content {
     width: 100%;
-    .basicInfo {
-      > div {
-        width: 50%;
 
-        &:last-child {
-          text-align: center;
-          > div {
+    &.flex {
+      display: flex;
+      gap: 16px;
+    }
+
+    .countryInfo {
+      width: 50%;
+
+      .basicInfo {
+        flex-direction: column;
+        gap: 8px;
+
+        > div {
+          width: 100%;
+
+          &:last-child {
             text-align: center;
+
+            > div {
+              text-align: center;
+            }
           }
         }
-      }
 
-      img {
-        width: 100%;
+        img {
+          width: 100%;
+        }
       }
+    }
+
+    .exchangeRateInfo {
+      flex: 1;
     }
   }
 }
