@@ -7,6 +7,10 @@ function WorldPriceIndex() {
   const [value, setValue] = useState(randomCountryName());
   const [priceIndexList, setPriceIndexList] = useState([]);
   const [ISO2, setISO2] = useState("");
+  const DATE = new Date();
+  const Year = DATE.getFullYear();
+  console.log(priceIndexList.slice(0, 9));
+
   const changeISO = (value) => {
     const resultISO = convertCodeISO2(value);
     setISO2(resultISO);
@@ -31,7 +35,7 @@ function WorldPriceIndex() {
     <div>
       <Search value={value} setValue={setValue} />
       WorldPriceIndex
-      {priceIndexList?.map((item, idx) => {
+      {priceIndexList?.slice(0, 9).map((item, idx) => {
         return (
           <div key={idx}>
             {item.country.value}
