@@ -1,7 +1,7 @@
 // google places API
 // -> 국가별 유명 관광지, 명소, 식당 등 검색용도
 
-const API_KEY = 'AIzaSyAto5q5dEorVVu3Saj2hTpQP1i3uhyq8gY';
+const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
 
 export async function getPlaces(country, place) {
   const reqURL = `/googlePlaceSearch?key=${API_KEY}&query=${country}의+유명+${place}`;

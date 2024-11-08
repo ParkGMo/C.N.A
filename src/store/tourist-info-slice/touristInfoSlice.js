@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { overseasTouristData } from '../../api/overseasTourist';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { overseasTouristData } from "../../api/overseasTourist";
 
 const initialState = {
   touristStatsData: [],
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const tourlistInfoSlice = createSlice({
-  name: 'touristInfoData',
+  name: "touristInfoData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -28,30 +28,32 @@ const tourlistInfoSlice = createSlice({
 });
 
 export const fetchOverseasTouristData = createAsyncThunk(
-  'touristInfoData/fetchOverseasTouristData',
+  "touristInfoData/fetchOverseasTouristData",
   async ({ yyyymm, portCode }) => {
     try {
       const data = await overseasTouristData(yyyymm, portCode);
 
       const result = [];
 
-      data.forEach((item) => {
-        let existingAgeCd = result.find(
-          (entry) => entry.ageCd === item.ageCd && entry.sex === item.sex
-        );
+      data
+        .filter((data) => data.ageCd !== "99")
+        .forEach((item) => {
+          let existingAgeCd = result.find(
+            (entry) => entry.ageCd === item.ageCd && entry.sex === item.sex
+          );
 
-        if (existingAgeCd) {
-          existingAgeCd.num = Number(item.num);
-        } else {
-          result.push({
-            port: item.port,
-            ageCd: item.ageCd,
-            num: Number(item.num),
-            gender: item.sexCd,
-            ym: item.ym,
-          });
-        }
-      });
+          if (existingAgeCd) {
+            existingAgeCd.num = Number(item.num);
+          } else {
+            result.push({
+              port: item.port,
+              ageCd: item.ageCd,
+              num: Number(item.num),
+              gender: item.sexCd,
+              ym: item.ym,
+            });
+          }
+        });
 
       const touristStatsData = result.sort((a, b) => a.ageCd - b.ageCd);
 
