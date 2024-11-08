@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { overseasTouristData } from '../../api/overseasTourist';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { overseasTouristData } from "../../api/overseasTourist";
 
 const initialState = {
   touristStatsData: [],
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const tourlistInfoSlice = createSlice({
-  name: 'touristInfoData',
+  name: "touristInfoData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -28,7 +28,7 @@ const tourlistInfoSlice = createSlice({
 });
 
 export const fetchOverseasTouristData = createAsyncThunk(
-  'touristInfoData/fetchOverseasTouristData',
+  "touristInfoData/fetchOverseasTouristData",
   async ({ yyyymm, portCode }) => {
     try {
       const data = await overseasTouristData(yyyymm, portCode);
@@ -36,7 +36,7 @@ export const fetchOverseasTouristData = createAsyncThunk(
       const result = [];
 
       data
-        .filter((data) => data.ageCd !== '99')
+        .filter((data) => data.ageCd !== "99")
         .forEach((item) => {
           let existingAgeCd = result.find(
             (entry) => entry.ageCd === item.ageCd && entry.sex === item.sex
